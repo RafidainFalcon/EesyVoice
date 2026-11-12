@@ -1,0 +1,2 @@
+const {identify,isAdmin,profile,error}=require('../lib/guard');
+module.exports=async(req,res)=>{res.setHeader('Cache-Control','no-store');if(req.method!=='GET')return res.status(405).end();try{const user=await identify(req);const ref=await profile(user.uid,user.email);const snap=await ref.get();const data=snap.data();return res.json({uid:user.uid,email:user.email,credits:data.credits,totalGenerations:data.totalGenerations||0,status:data.status||'active',admin:await isAdmin(user.uid)})}catch(e){return error(res,e)}};

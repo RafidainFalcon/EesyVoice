@@ -1,0 +1,2 @@
+const {identify,db,error}=require('../lib/guard');
+module.exports=async(req,res)=>{res.setHeader('Cache-Control','no-store');if(req.method!=='GET')return res.status(405).end();try{const user=await identify(req);const snap=await db.collection('generationJobs').where('uid','==',user.uid).orderBy('createdAt','desc').limit(30).get();return res.json({items:snap.docs.map(d=>({id:d.id,...d.data(),createdAt:d.data().createdAt?.toDate?.()?.toISOString()||null}))})}catch(e){return error(res,e)}};
