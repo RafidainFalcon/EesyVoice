@@ -1,0 +1,10 @@
+(()=>{'use strict';
+async function token(){const u=window.eesyAuth?.currentUser;if(!u)throw Error('سجّل الدخول أولاً');return u.getIdToken()}
+async function api(method,body){const t=await token(),r=await fetch('/api/captcha',{method,headers:{Authorization:'Bearer '+t,'Content-Type':'application/json'},...(body?{body:JSON.stringify(body)}:{})});const d=await r.json().catch(()=>({}));if(!r.ok)throw Error(d.error||'تعذر التحقق');return d}
+window.eesyCaptcha=async()=>{const c=await api('GET');return new Promise((resolve,reject)=>{
+ const layer=document.createElement('div');layer.className='eesy-captcha-layer';layer.setAttribute('role','dialog');layer.setAttribute('aria-modal','true');layer.setAttribute('aria-label','التحقق من الإيموجي');
+ const panel=document.createElement('div');panel.className='eesy-captcha-panel';const heading=document.createElement('h2');heading.textContent='التحقق الأمني 🛡️';const desc=document.createElement('p');desc.textContent='اضغط على الإيموجي المطابق';const target=document.createElement('div');target.className='eesy-captcha-target';target.textContent=c.target;const options=document.createElement('div');options.className='eesy-captcha-options';const message=document.createElement('p');message.setAttribute('aria-live','polite');const cancel=document.createElement('button');cancel.textContent='إلغاء';cancel.className='secondary';const cleanup=()=>layer.remove();cancel.onclick=()=>{cleanup();reject(Error('تم إلغاء التحقق'))};
+ c.options.forEach((emoji,i)=>{const b=document.createElement('button');b.type='button';b.textContent=emoji;b.setAttribute('aria-label','الخيار '+(i+1)+': '+emoji);b.onclick=async()=>{options.querySelectorAll('button').forEach(x=>x.disabled=true);try{const v=await api('POST',{id:c.id,choice:i});cleanup();resolve(v.proof)}catch(e){cleanup();reject(e)}};options.append(b)});
+ panel.append(heading,desc,target,options,message,cancel);layer.append(panel);document.body.append(layer);options.querySelector('button')?.focus();
+ })};
+})();

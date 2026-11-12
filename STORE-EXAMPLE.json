@@ -1,0 +1,21 @@
+{
+  "packages": [
+    {"id":"asia_1","title":"آسياسيل - 50 نقطة","credits":50,"price":1,"methodId":"asiacell"},
+    {"id":"asia_5","title":"آسياسيل - 500 نقطة","credits":500,"price":5,"methodId":"asiacell"},
+    {"id":"asia_10","title":"آسياسيل - 1100 نقطة","credits":1100,"price":10,"methodId":"asiacell"},
+    {"id":"asia_25","title":"آسياسيل - 3000 نقطة","credits":3000,"price":25,"methodId":"asiacell"},
+    {"id":"zain_1","title":"زين كاش - 55 نقطة","credits":55,"price":1,"methodId":"zaincash"},
+    {"id":"zain_5","title":"زين كاش - 550 نقطة","credits":550,"price":5,"methodId":"zaincash"},
+    {"id":"zain_10","title":"زين كاش - 1250 نقطة","credits":1250,"price":10,"methodId":"zaincash"},
+    {"id":"zain_25","title":"زين كاش - 3300 نقطة","credits":3300,"price":25,"methodId":"zaincash"},
+    {"id":"master_1","title":"ماستركارد - 60 نقطة","credits":60,"price":1,"methodId":"mastercard"},
+    {"id":"master_5","title":"ماستركارد - 600 نقطة","credits":600,"price":5,"methodId":"mastercard"},
+    {"id":"master_10","title":"ماستركارد - 1500 نقطة","credits":1500,"price":10,"methodId":"mastercard"},
+    {"id":"master_25","title":"ماستركارد - 5000 نقطة","credits":5000,"price":25,"methodId":"mastercard"}
+  ],
+  "methods": [
+    {"id":"asiacell","name":"آسياسيل","instructions":"تواصل مع الإدارة للحصول على رقم التحويل"},
+    {"id":"zaincash","name":"زين كاش","instructions":"تواصل مع الإدارة للحصول على بيانات الدفع"},
+    {"id":"mastercard","name":"ماستركارد","instructions":"تواصل مع الإدارة للحصول على تعليمات الدفع"}
+  ]
+}
